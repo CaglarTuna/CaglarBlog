@@ -1,0 +1,91 @@
+﻿@model CaglarBlog.Models.Category
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title Anasayfa</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <link rel="stylesheet" href="~/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="~/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="~/vendors/linericon/style.css">
+    <link rel="stylesheet" href="~/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/vendors/owl-carousel/owl.carousel.min.css">
+    <link href="~/Content/ozel.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+
+    <header class="header_area" style="margin-top:-50px">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container box_1620">
+                    <a class="navbar-brand logo_h" href="index.html"><img src="~/img/logom3.png" style="width:80px" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav justify-content-center">
+                            <li class="nav-item "><a class="nav-link" href="/Posts/Index">Anasayfa</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="/Category/Index">Kategori</a>
+                            <li class="nav-item"><a class="nav-link" href="/Top3/Index">TOP 3</a>
+
+                            <li class="nav-item"><a class="nav-link" href="/Iletisim/Index">Iletişim</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Account/Register">Register</a></li>
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item"><a class="nav-link">Dear - @User.Identity.Name</a> </li>
+                                <li class="nav-item"><a class="nav-link" href="/Account/Logout">Logout</a></li>
+
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-item"><a class="nav-link" href="/Account/UserList">UserList</a></li>
+                                }
+
+                            }
+                            else
+                            {
+                                <li class="nav-item"><a class="nav-link" href="/Account/Login">Login</a></li>
+                            }
+
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right navbar-social">
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                            <li><a href="#"><i class="ti-instagram"></i></a></li>
+                            <li><a href="#"><i class="ti-skype"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <hr />
+    <footer></footer>
+    <script src="~/vendors/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/js/mail-script.js"></script>
+    <script src="~/js/main.js"></script>
+
+
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

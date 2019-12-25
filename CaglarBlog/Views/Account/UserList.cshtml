@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CaglarBlog.Models.Users>
+
+@{
+    ViewBag.Title = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UserList</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.UserID  }) 
+            @Html.ActionLink("Delete", "DeleteAccount", new {  id=item.UserID  })
+        </td>
+    </tr>
+}
+
+</table>

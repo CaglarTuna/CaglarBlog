@@ -1,0 +1,142 @@
+﻿@using CaglarBlog.Models
+@model CaglarBlog.Models.Post
+
+
+
+@{
+    ViewBag.Title = "Goster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    CaglarBlogEntities db = new CaglarBlogEntities();
+
+    var yorumlist = db.Comment.Where(x => x.Postid == Model.PostID).ToList();
+
+}
+
+<section style="margin-left:450px" class="blog-post-area section-margin mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+
+                <div class="single-recent-blog-post">
+                    <div class="thumb">
+                        <img class="img-fluid" src="~/img/kahkit.jpg" alt="">
+                        <ul class="thumb-info">
+                            <li><a href="#"><i class="ti-user"></i>Admin</a></li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-notepad"></i>@if (Model.TimeAdded.HasValue)
+                                    {
+                                        Model.TimeAdded.Value.ToShortDateString();
+                                    }
+                                </a>
+                            </li>
+                            <li><a href="#"><i class="ti-themify-favicon"></i>@yorumlist.Count() Yorum</a></li>
+                            <li>
+                                <a href="/Kullanıcı/LikeKaydet/@Model.PostID">   <img style="width:20px;margin-top:-5px" src="~/img/flike.png" /> @Model.Begeni </a>
+
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="details mt-20">
+                        <a href="blog-single.html">
+                            <h3>
+                                @Model.PostBaslik
+                            </h3>
+                        </a>
+                        <p class="tag-list-inline">Kategori: <a href="#">MAKALE KATEGORI</a></p>
+                        <p>@Model.PostIcerik</p>
+
+
+                        <br />
+                        <input type="hidden" name="PostID" value="@Model.PostID" />
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <h2><b>Okuyucu Yorumları</b></h2>
+        @*<--------------------->  YORUM </--------------------->*@
+        <br />
+        @foreach (var item in yorumlist)
+        {
+            <div class="container">
+
+
+                <div class="card" style="width:700px">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+                                <p class="text-secondary text-center"><strong style="color:blue">@User.Identity.Name</strong></p>
+                            </div>
+                            <div class="col-md-10">
+                                <p>
+                                    <strong>
+                                        @if (item.DateAdded.HasValue)
+                                        {
+                                            @item.DateAdded.Value.ToShortDateString()
+                                        }
+                                                                    </strong>
+
+                                </p>
+                                <div class="clearfix"></div>
+                                <p>@item.CommentIcerik</p>
+                            </div>
+                        </div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <button type="submit" class="bg-danger">@Html.ActionLink("Delete", "Delete", new { id = item.CommentID })</button>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <br /><br /><br />
+        }
+        
+
+
+
+
+
+
+
+
+        @*<--------------------->  YORUM </--------------------->*@
+
+        <form method="post" action="/Posts/YorumKaydet">
+
+            <div class="form-group-sm">
+                <br />
+                <label>Yorum Metni</label>
+                <textarea rows="9" class="form-control" name="CommentIcerik">Yorum Giriniz...</textarea>
+                <input type="hidden" name="DateAdded" value="@DateTime.Now" class="form-control" />
+                <input type="hidden" name="PostID" value="@Model.PostID" class="form-control" />
+                <br />
+
+                <button type="submit" class="btn btn-primary form-control" style="width:200px">Gönder</button>
+
+
+
+            </div>
+
+
+
+        </form>
+
+
+
+
+
+
+
+    </div>
+</section>
+

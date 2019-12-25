@@ -1,0 +1,47 @@
+﻿@using CaglarBlog.Models
+@model List<Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<style>
+
+    .vertical-menu {
+        width: 200px; 
+    }
+
+        .vertical-menu a {
+            background-color: #eee; 
+            color: black; 
+            display: block; 
+            padding: 12px; 
+            text-decoration: none; 
+        }
+
+            .vertical-menu a:hover {
+                background-color: #ccc; 
+            }
+
+            .vertical-menu a.active {
+                background-color: #4CAF50; 
+                color: white;
+            }
+</style>
+
+<div class="col-md-3">
+
+    <div class="vertical-menu">
+
+        @foreach (var item in Model)
+        {
+            <a href="/Category/KategoriGoster/@item.CategoryID">@item.CategoryName</a>
+        }
+
+
+    </div>
+
+</div>
+

@@ -1,0 +1,48 @@
+﻿@using CaglarBlog.Models
+@model CaglarBlog.Models.Makale
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "yeniKayit";
+    CaglarBlogEntities db = new CaglarBlogEntities();
+}
+<div class="row">
+    <div class="container">
+        <h2> Kayıt Güncelle</h2>
+        @using (Html.BeginForm())
+        {
+            <div class=" col-md-4">
+                @Html.HiddenFor(k => k.PostID)
+                <br />
+                @Html.LabelFor(k => k.PostBaslik)
+                @Html.TextBoxFor(k => k.PostBaslik, new { @class = "form-control" })
+                @Html.ValidationMessageFor(k => k.PostBaslik, null, new { @class = "text-danger" })<br />
+
+                <br />
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(k => k.PostIcerik)
+                @Html.TextBoxFor(k => k.PostIcerik, new { @class = "form-control" })
+                @Html.ValidationMessageFor(k => k.PostIcerik, null, new { @class = "text-danger" })<br />
+
+                <br />
+                @Html.LabelFor(k => k.Like)
+                @Html.TextBoxFor(k => k.Like, new { @class = "form-control" })
+                @Html.ValidationMessageFor(k => k.Like, null, new { @class = "text-danger" })<br />
+                <br />
+            </div>
+            @Html.LabelFor(k => k.TimeAdded)<br />
+            @Html.TextBoxFor(k => k.TimeAdded, new { @class = "form-control" })
+            @Html.ValidationMessageFor(k => k.TimeAdded, null, new { @class = "text-danger" })<br />
+            <br />
+            @*@Html.LabelFor(k => k.Category)<br />
+            @Html.DropDownList("Category", ViewBag.Urunler as SelectList)
+            @Html.ValidationMessageFor(k => k.Category, null, new { @class = "text-danger" })<br />
+            <br />*@
+            if (ViewBag.sonuc != null)
+            {
+                <div class="alert alert-success"> @ViewBag.sonuc</div>
+            }
+            <input type="submit" value="Kaydet" class="btn btn-success" />
+        }
+    </div>
+</div>

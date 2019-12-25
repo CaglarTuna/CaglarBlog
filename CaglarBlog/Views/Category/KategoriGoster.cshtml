@@ -1,0 +1,97 @@
+﻿@using CaglarBlog.Models
+@model CaglarBlog.Models.Category
+
+@{
+    ViewBag.Title = "KategoriGoster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    CaglarBlogEntities db = new CaglarBlogEntities();
+
+    var mlist = db.Post.Where(x => x.CatID == Model.CategoryID).ToList();
+
+    var klist = db.Category.ToList();
+
+
+}
+
+<style>
+
+    .vertical-menu {
+        width: 200px; 
+    }
+
+        .vertical-menu a {
+            background-color: #eee; 
+            color: black; 
+            display: block; 
+            padding: 12px; 
+            text-decoration: none; 
+        }
+
+            .vertical-menu a:hover {
+                background-color: #ccc; 
+            }
+
+            .vertical-menu a.active {
+                background-color: #4CAF50; 
+                color: white;
+            }
+</style>
+<section>
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="vertical-menu">
+                @foreach (var item in klist)
+                {
+                    <a href="/Category/KategoriGoster/@item.CategoryID">@item.CategoryName</a>
+                }
+
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            @foreach (var item in mlist)
+            {
+
+                <div class="single-recent-blog-post">
+                    <div class="thumb">
+                        <img class="img-fluid" src="~/img/kahkit.jpg" alt="">
+                        <ul class="thumb-info">
+                            <li><a href="/Posts/Goster/@item.PostID"><i class="ti-user"></i>Admin</a></li>
+
+                            <li><a href="/Posts/Goster/@item.PostID"><i class="ti-notepad"></i>
+                                @if (item.TimeAdded.HasValue)
+                            {
+                                item.TimeAdded.Value.ToShortDateString();
+                            }
+                                 </a></li>
+
+                            <li><a href="/Posts/Goster/@item.PostID">   <img style="width:20px;margin-top:-5px" src="~/img/flike.png" /> @item.Begeni </a></li>
+
+                        </ul>
+                    </div>
+                    <div class="details mt-20">
+                        <a href="/Posts/Goster/@item.PostID">
+                            <h3>
+                                @item.PostBaslik
+                            </h3>
+                        </a>
+                        <p class="tag-list-inline"><b>Kategori:</b> <a href="#"><b>@item.Category.CategoryName</b></a></p>
+                        @*<p style="width:450px">@item.PostIcerik.Substring(0, 200)...</p>*@
+
+                        <a class="button" href="/Posts/Goster/@item.PostID">Tamamını Oku<i class="ti-arrow-right"></i></a>
+                        <br />
+                        <input type="hidden" name="PostID" value="@item.PostID" />
+                        <br />
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</section>
