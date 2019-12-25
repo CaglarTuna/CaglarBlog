@@ -26,6 +26,7 @@ namespace CaglarBlog.Controllers
         {
             var idd = db.Comment.Where(x => x.Postid == id).FirstOrDefault().Postid;
             bool check = true;
+
             while (id==idd&&check==true)
             {
                 var iddd = db.Comment.Where(x => x.Postid == id).FirstOrDefault().CommentID;

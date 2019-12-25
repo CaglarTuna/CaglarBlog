@@ -86,3 +86,4 @@ C:\Users\Lenova\Desktop\proje\CaglarBlog\CaglarBlog\bin\EntityFramework.dll
 C:\Users\Lenova\Desktop\proje\CaglarBlog\CaglarBlog\bin\EntityFramework.SqlServer.dll
 C:\Users\Lenova\Desktop\proje\CaglarBlog\CaglarBlog\bin\EntityFramework.xml
 C:\Users\Lenova\Desktop\proje\CaglarBlog\CaglarBlog\bin\EntityFramework.SqlServer.xml
+C:\Users\Lenova\Desktop\proje\CaglarBlog\CaglarBlog\obj\Debug\CaglarBlog.csprojAssemblyReference.cache
